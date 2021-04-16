@@ -75,7 +75,7 @@ const NftAccountCard = ({ card
     <NFTWrapper key={ID} type="button">
       <StyledFlex>
         <Image src={card.img} alt="nft-preview" className="nft-preview" />
-        <Flex padding="7px 16px" justifyContent="space-between">
+        <Flex padding="13px 16px 0 16px" justifyContent="space-between">
           <Text style={{ fontSize: '14px', color: '#8990A5' }}>Total available cards:</Text>
           <Text style={{ fontSize: '14px', color: '#6C5DD3' }}>11</Text>
         </Flex>

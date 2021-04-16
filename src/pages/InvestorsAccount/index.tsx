@@ -32,7 +32,7 @@ import NftAccountCard from './components/NftAccountCard'
 
 const ContentHolder = styled.div`
   position: relative;
-  margin: -11px 9px;
+  margin: auto;
 `
 
 // const ButtonWrap = styled.div`
@@ -168,6 +168,16 @@ const NftCardsContainer = styled.div`
   > button:not(:last-child) {
     margin-right: 30px;
   }
+`
+
+const StyledWarning = styled.div`
+  margin: 32px 0 56px 0;
+  border: 1px solid #D2D6E5;
+  border-radius: 6px;
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  height: 46px;
 `
 
 // const NotifyMembers = (hash, currency) => {
@@ -326,7 +336,7 @@ const InvestorsAccount = () => {
   return (
     <ContentHolder>
       <CardWrapper>
-        <Text fontSize="48px" style={{fontWeight: 700, marginBottom: '32px'}}>Your NFT deck</Text>
+        <Text fontSize="48px" style={{fontWeight: 700, marginBottom: '24px', marginTop: '-10px'}}>Your NFT deck</Text>
         {/* <Modal isOpen={isOpenModal} onDismiss={handleClose}>
           <Flex flexDirection="column">
             <Text
@@ -410,13 +420,6 @@ const InvestorsAccount = () => {
           <TransactionSucceedContent hash={succeedHash} onDismiss={handleSucceedModalClose} />
         </Modal> */}
 
-        <StyledHeading as="h1" size="xl" color="heading" mb="40px" mt="20px" className="heading--desktop">
-          {t('strategicalPartnership')}
-        </StyledHeading>
-        <StyledHeading as="h1" size="xl" color="heading" mb="40px" className="heading--mobile">
-          {t('strategicalPartnership')}
-        </StyledHeading>
-
         <AppBody>
           <NftCardsContainer>
             {cardList.map((card) => (
@@ -467,6 +470,11 @@ const InvestorsAccount = () => {
               />
             ))}
           </NftCardsContainer>
+          <StyledWarning>
+            <Text style={{display: 'inline-block', marginRight: '8px', fontSize: '24px', color: '#FF4D00'}}>*</Text>
+            <Text style={{display: 'inline-block', color: '#8990A5', fontSize: '16px'}}>Please note that converting Private NFTs to ALMs is an irreversible action.</Text>
+          </StyledWarning>
+          {/* <PageSwitcher /> */}
         </AppBody>
       </CardWrapper>
     </ContentHolder>

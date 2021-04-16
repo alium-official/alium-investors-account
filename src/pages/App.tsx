@@ -37,8 +37,8 @@ const BodyWrapper = styled.div`
   }
 `
 
-const Marginer = styled.div`
-  margin-top: 5rem;
+const StyledContainer = styled.div`
+  display: flex;
 `
 
 export default function App() {
@@ -55,12 +55,13 @@ export default function App() {
                 {/* <Route exact strict path="/" component={Home} /> */}
                 {/* <Route exact strict path="/" component={StrategicalPartnerShipHome} /> */}
                 <Menu>
-                  <Route exact strict path="/" component={InvestorsAccount} />
+                  <StyledContainer>
+                    <Route exact strict path="/" component={InvestorsAccount} />
+                  </StyledContainer>
                 </Menu>
                 <Route render={() => <Redirect to={{ pathname: '/' }} />} />
               </Switch>
             </Web3ReactManager>
-            <Marginer />
           </BodyWrapper>
         </AppWrapper>
       </BrowserRouter>
