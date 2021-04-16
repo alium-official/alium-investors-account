@@ -7,8 +7,10 @@ export const BodyWrapper = styled(Card)`
   width: 100%;
   z-index: 5;
   border-radius: 6px;
-  padding: 32px;
   box-sizing: border-box;
+  background: transparent;
+  box-shadow: none;
+  padding: 0;
   
   @media screen and (max-width: 790px) {
     padding: 16px 10px;

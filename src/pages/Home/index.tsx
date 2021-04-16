@@ -441,7 +441,7 @@ const Home = () => {
             >
               {t('pleaseUnlockWallet')}
             </Text>
-            <ConnectWalletButton fullWidth />
+            <ConnectWalletButton fullwidth />
           </Flex>
         </Modal>
         <Modal isOpen={isTxOpen} onDismiss={handleTxClose} maxHeight={90} padding="24px">
@@ -525,7 +525,7 @@ const Home = () => {
             </StyledFormControl>
             {/* <ButtonWrap>
               {!account ? (
-                <ConnectWalletButton fullWidth />
+                <ConnectWalletButton fullwidth />
               ) : (
                 <AutoColumn gap="md">
                   <RowBetween>
@@ -541,7 +541,7 @@ const Home = () => {
 
             <ButtonWrap>
               {!account ? (
-                <ConnectWalletButton fullWidth />
+                <ConnectWalletButton fullwidth />
               ) : (
                 <AutoColumn gap="md">
                   {isValidInputs && activeCard && values.count <= maxAmountOfCards ? (

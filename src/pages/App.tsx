@@ -3,10 +3,9 @@ import React, { Suspense } from 'react'
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom'
 import styled from 'styled-components'
 import Popups from '../components/Popups'
-
 import Web3ReactManager from '../components/Web3ReactManager'
-import Header from './Home/components/Header'
-import StrategicalPartnerShipHome from './StrategicalPartnership'
+import Menu from '../components/Menu'
+import InvestorsAccount from './InvestorsAccount'
 
 const AppWrapper = styled.div`
   display: flex;
@@ -49,13 +48,15 @@ export default function App() {
     <Suspense fallback={null}>
       <BrowserRouter>
         <AppWrapper>
-          <Header />
           <BodyWrapper>
             <Popups />
             <Web3ReactManager>
               <Switch>
                 {/* <Route exact strict path="/" component={Home} /> */}
-                <Route exact strict path="/" component={StrategicalPartnerShipHome} />
+                {/* <Route exact strict path="/" component={StrategicalPartnerShipHome} /> */}
+                <Menu>
+                  <Route exact strict path="/" component={InvestorsAccount} />
+                </Menu>
                 <Route render={() => <Redirect to={{ pathname: '/' }} />} />
               </Switch>
             </Web3ReactManager>

@@ -1,67 +1,47 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
-import axios from 'axios'
-import { parseUnits } from '@ethersproject/units'
+// import axios from 'axios'
+// import { parseUnits } from '@ethersproject/units'
 import styled from 'styled-components'
-import { JSBI, TokenAmount } from '@aliumswap/sdk'
-import { Heading, Text, Flex, Button } from '@aliumswap/uikit'
+// import { JSBI, TokenAmount } from '@aliumswap/sdk'
+import { Heading, Text, Flex } from '@aliumswap/uikit'
 import ConnectWalletButton from 'components/ConnectWalletButton'
 import Modal from 'components/Modal'
 
 import { useActiveWeb3React } from 'hooks'
-import { ApprovalState, useApproveCallback } from 'hooks/useApproveCallback'
+// import { ApprovalState, useApproveCallback } from 'hooks/useApproveCallback'
 import { useNFTPrivateContract } from 'hooks/useContract'
-
-import { NFT_PRIVATE_ADDRESS } from 'constants/abis/nftPrivate'
-import { WrappedTokenInfo } from 'state/lists/hooks'
-import { useCurrencyBalance } from 'state/wallet/hooks'
-import { useTransactionAdder } from 'state/transactions/hooks'
+// import { NFT_PRIVATE_ADDRESS } from 'constants/abis/nftPrivate'
+// import { WrappedTokenInfo } from 'state/lists/hooks'
+// import { useCurrencyBalance } from 'state/wallet/hooks'
+// import { useTransactionAdder } from 'state/transactions/hooks'
 import { PopupList } from 'state/application/reducer'
 import { AppState } from 'state/index'
 import { TransactionSubmittedContent, TransactionSucceedContent } from 'components/TransactionConfirmationModal'
-import { AutoColumn } from 'components/Column'
-import { RowBetween } from 'components/Row'
-import { GreyCard } from 'components/Card'
-import { Dots } from '../Pool/styleds'
+// import { AutoColumn } from 'components/Column'
+// import { RowBetween } from 'components/Row'
+// import { GreyCard } from 'components/Card'
+// import { Dots } from '../Pool/styleds'
 import AppBody from '../AppBody'
-import currencies from './constants/currencies'
+// import currencies from './constants/currencies'
 import whitelist from './constants/whitelist'
 import cardList from './constants/cards'
-import bgIMG from '../Home/images/background-img.svg'
-import emails from './constants/membersList'
-import NftPartnershipCard from './components/NftPartnershipCard'
+// import emails from './constants/membersList'
+import NftAccountCard from './components/NftAccountCard'
 
 const ContentHolder = styled.div`
   position: relative;
-  & .content-background {
-    position: absolute;
-    right: -20px;
-    top: -35px;
-  }
-  
-  @media screen and (max-width: 1170px) {
-    & .content-background {
-      top: 12px;
-      }
-  }
-
-  @media screen and (max-width: 480px) {
-    & .content-background {
-      right: 0;
-      top: 50px;
-    }
-  }
+  margin: -11px 9px;
 `
 
-const ButtonWrap = styled.div`
-  
-`
+// const ButtonWrap = styled.div`
+//
+// `
 
 const CardWrapper = styled.div`
   width: 100%;
   font-family: Roboto, sans-serif;
-  max-width: 906px;
   width: 100%;
   margin: 0 auto;
   position: relative;
@@ -183,23 +163,30 @@ const StyledTextWrapper = styled.div`
   }
 `
 
-const NotifyMembers = (hash, currency) => {
-  const explorer = 'https://bscscan.com/tx'
-  if (process.env.NODE_ENV !== 'development') {
-    emails.forEach((email) => {
-      const obj = {
-        to: email,
-        subject: 'New card purchase',
-        message: `Client bought card for ${currency} \n  ${explorer}/${hash}`,
-      }
-      axios.post('https://private.alium.finance/api/send-email/', obj).catch((err) => {
-        console.error(err)
-      })
-    })
+const NftCardsContainer = styled.div`
+  display: flex;
+  > button:not(:last-child) {
+    margin-right: 30px;
   }
-}
+`
 
-const StrategicalPartnershipHome = () => {
+// const NotifyMembers = (hash, currency) => {
+//   const explorer = 'https://bscscan.com/tx'
+//   if (process.env.NODE_ENV !== 'development') {
+//     emails.forEach((email) => {
+//       const obj = {
+//         to: email,
+//         subject: 'New card purchase',
+//         message: `Client bought card for ${currency} \n  ${explorer}/${hash}`,
+//       }
+//       axios.post('https://private.alium.finance/api/send-email/', obj).catch((err) => {
+//         console.error(err)
+//       })
+//     })
+//   }
+// }
+
+const InvestorsAccount = () => {
   const [isOpenModal, setOpenModal] = useState(false)
   const [isHideModalOpen, setHideModalOpen] = useState(false)
   const { account, chainId } = useActiveWeb3React()
@@ -224,20 +211,20 @@ const StrategicalPartnershipHome = () => {
       if (res === true) {
         setSucceedPopupVisible(true);
       } else if (isSucceedPopupVisible) {
-          setSucceedPopupVisible(false)
-        }
+        setSucceedPopupVisible(false)
+      }
     })
   }, [account, isSucceedPopupVisible, nftContract])
 
-  const [values, setValues] = useState<any>({
-    currency: currencies.stablecoins[0],
-    count: 1,
-  })
+  // const [values, setValues] = useState<any>({
+  //   currency: currencies.stablecoins[0],
+  //   count: 1,
+  // })
 
   const [txHash, setTxHash] = useState('xczxczxczxc')
   const [tempTxHash, setTempTxHash] = useState('')
   const [isTxOpen, setTxOpen] = useState(false)
-  const [bought, setBought] = useState(false);
+  // const [bought, setBought] = useState(false);
 
   const state = useSelector<AppState, AppState['transactions']>((s) => s.transactions)
   const transactions: any = chainId ? state[chainId] ?? {} : {}
@@ -248,69 +235,69 @@ const StrategicalPartnershipHome = () => {
     setTxOpen(false)
   }
 
-  const addTransaction = useTransactionAdder()
+  // const addTransaction = useTransactionAdder()
+  //
+  // const cardPrice = '100000'
 
-  const cardPrice = '100000'
+  // const handleBuy = () => {
+  //   const totalAmount = cardPrice
+  //   const args = [
+  //     currencies.match[values.currency]?.address,
+  //     '5',
+  //     parseUnits(totalAmount, currencies.match[values.currency]?.decimals),
+  //   ]
+  //   nftContract?.estimateGas
+  //     .buy(...args, { from: account })
+  //     .then((estimatedGasLimit) => {
+  //       nftContract
+  //         ?.buy(...args, { gasLimit: estimatedGasLimit })
+  //         .then((resp) => {
+  //           NotifyMembers(resp.hash, values.currency)
+  //           addTransaction(resp, {
+  //             summary: t('boughtCards', { count: '1' }),
+  //             additionalData: {
+  //               count: '1',
+  //               card: '1',
+  //             },
+  //           })
+  //
+  //           setTxHash(resp.hash)
+  //           setTxOpen(true)
+  //           setBought(true)
+  //         })
+  //         .catch((err) => console.error(err))
+  //     })
+  //     .catch((err) => console.error(err))
+  // }
 
-  const handleBuy = () => {
-    const totalAmount = cardPrice
-    const args = [
-      currencies.match[values.currency]?.address,
-      '5',
-      parseUnits(totalAmount, currencies.match[values.currency]?.decimals),
-    ]
-    nftContract?.estimateGas
-      .buy(...args, { from: account })
-      .then((estimatedGasLimit) => {
-        nftContract
-          ?.buy(...args, { gasLimit: estimatedGasLimit })
-          .then((resp) => {
-            NotifyMembers(resp.hash, values.currency)
-            addTransaction(resp, {
-              summary: t('boughtCards', { count: '1' }),
-              additionalData: {
-                count: '1',
-                card: '1',
-              },
-            })
+  // const [approval, approveCallback] = useApproveCallback(
+  //   new TokenAmount(
+  //     new WrappedTokenInfo(currencies.match[values.currency], []),
+  //     JSBI.BigInt(parseUnits(cardPrice, currencies.match[values.currency]?.decimals).toString())
+  //   ),
+  //   NFT_PRIVATE_ADDRESS
+  // )
+  // const [approvalSubmitted, setApprovalSubmitted] = React.useState<boolean>(false)
 
-            setTxHash(resp.hash)
-            setTxOpen(true)
-            setBought(true)
-          })
-          .catch((err) => console.error(err))
-      })
-      .catch((err) => console.error(err))
-  }
+  // useEffect(() => {
+  //   if (approval === ApprovalState.PENDING) {
+  //     setApprovalSubmitted(true)
+  //   }
+  // }, [approval, approvalSubmitted])
 
-  const [approval, approveCallback] = useApproveCallback(
-    new TokenAmount(
-      new WrappedTokenInfo(currencies.match[values.currency], []),
-      JSBI.BigInt(parseUnits(cardPrice, currencies.match[values.currency]?.decimals).toString())
-    ),
-    NFT_PRIVATE_ADDRESS
-  )
-  const [approvalSubmitted, setApprovalSubmitted] = React.useState<boolean>(false)
+  // const handleChange = (value) => {
+  //   setValues(value);
+  //   if (approvalSubmitted && approval !== ApprovalState.PENDING) {
+  //     setApprovalSubmitted(false)
+  //   }
+  // }
 
-  useEffect(() => {
-    if (approval === ApprovalState.PENDING) {
-      setApprovalSubmitted(true)
-    }
-  }, [approval, approvalSubmitted])
+  // const balance = useCurrencyBalance(account?.toString(), new WrappedTokenInfo(currencies.match[values.currency], []))
 
-  const handleChange = (value) => {
-    setValues(value);
-    if (approvalSubmitted && approval !== ApprovalState.PENDING) {
-      setApprovalSubmitted(false)
-    }
-  }
-
-  const balance = useCurrencyBalance(account?.toString(), new WrappedTokenInfo(currencies.match[values.currency], []))
-
-  const sufficientBalance =
-    balance &&
-    parseInt(balance?.raw.toString()) >=
-      parseInt(parseUnits(cardPrice, currencies.match[values.currency]?.decimals).toString())
+  // const sufficientBalance =
+  //   balance &&
+  //   parseInt(balance?.raw.toString()) >=
+  //   parseInt(parseUnits(cardPrice, currencies.match[values.currency]?.decimals).toString())
 
   const accountEllipsis = account ? `${account.substring(0, 8)}...${account.substring(account.length - 8)}` : null
 
@@ -338,9 +325,9 @@ const StrategicalPartnershipHome = () => {
 
   return (
     <ContentHolder>
-      <img className="content-background" src={bgIMG} alt="background" />
       <CardWrapper>
-        <Modal isOpen={isOpenModal} onDismiss={handleClose}>
+        <Text fontSize="48px" style={{fontWeight: 700, marginBottom: '32px'}}>Your NFT deck</Text>
+        {/* <Modal isOpen={isOpenModal} onDismiss={handleClose}>
           <Flex flexDirection="column">
             <Text
               style={{
@@ -421,7 +408,7 @@ const StrategicalPartnershipHome = () => {
 
         <Modal isOpen={isSucceedPopupVisible} onDismiss={handleSucceedModalClose} maxHeight={90} padding="24px">
           <TransactionSucceedContent hash={succeedHash} onDismiss={handleSucceedModalClose} />
-        </Modal>
+        </Modal> */}
 
         <StyledHeading as="h1" size="xl" color="heading" mb="40px" mt="20px" className="heading--desktop">
           {t('strategicalPartnership')}
@@ -431,57 +418,59 @@ const StrategicalPartnershipHome = () => {
         </StyledHeading>
 
         <AppBody>
-          {cardList.map((card) => (
-            <NftPartnershipCard
-              card={card}
-              handleChange={handleChange}
-              buttonWrap={
-                <ButtonWrap>
-                  {!account ? (
-                    <ConnectWalletButton fullwidth />
-                  ) : (
-                    <AutoColumn gap="md">
-                      {sufficientBalance ? (
-                        approval === ApprovalState.APPROVED ? (
-                          !bought ? (
-                            <RowBetween>
-                              <Button onClick={handleBuy}  style={{width: '100%'}}>{t('buyAmountCards', { count: 1 })}</Button>
-                            </RowBetween>
-                          ) : (
-                            <GreyCard style={{ textAlign: 'center' }}>
-                              Please, wait...
-                            </GreyCard>
-                          )
-                        ) : (
-                          <RowBetween>
-                            <Button
-                              onClick={approveCallback}
-                              disabled={approval === ApprovalState.PENDING || approvalSubmitted}
-                              style={{width: '100%'}}
-                            >
-                              {approval === ApprovalState.PENDING || approvalSubmitted ? (
-                                <Dots>{t('approving', { count: values.currency })}</Dots>
-                              ) : (
-                                t('approve', { count: values.currency })
-                              )}
-                            </Button>
-                          </RowBetween>
-                        )
-                      ) : (
-                        <GreyCard style={{ textAlign: 'center', width: '100%' }}>
-                          {balance && !sufficientBalance ? t('insufficientBalance') : 'Please, wait...'}
-                        </GreyCard>
-                      )}
-                    </AutoColumn>
-                  )}
-                </ButtonWrap>
-              }
-            />
-          ))}
+          <NftCardsContainer>
+            {cardList.map((card) => (
+              <NftAccountCard
+                card={card}
+                // handleChange={handleChange}
+                // buttonWrap={
+                //   <ButtonWrap>
+                //     {!account ? (
+                //       <ConnectWalletButton fullwidth />
+                //     ) : (
+                //       <AutoColumn gap="md">
+                //         {sufficientBalance ? (
+                //           approval === ApprovalState.APPROVED ? (
+                //             !bought ? (
+                //               <RowBetween>
+                //                 <Button onClick={handleBuy}  style={{width: '100%'}}>{t('buyAmountCards', { count: 1 })}</Button>
+                //               </RowBetween>
+                //             ) : (
+                //               <GreyCard style={{ textAlign: 'center' }}>
+                //                 Please, wait...
+                //               </GreyCard>
+                //             )
+                //           ) : (
+                //             <RowBetween>
+                //               <Button
+                //                 onClick={approveCallback}
+                //                 disabled={approval === ApprovalState.PENDING || approvalSubmitted}
+                //                 style={{width: '100%'}}
+                //               >
+                //                 {approval === ApprovalState.PENDING || approvalSubmitted ? (
+                //                   <Dots>{t('approving', { count: values.currency })}</Dots>
+                //                 ) : (
+                //                   t('approve', { count: values.currency })
+                //                 )}
+                //               </Button>
+                //             </RowBetween>
+                //           )
+                //         ) : (
+                //           <GreyCard style={{ textAlign: 'center', width: '100%' }}>
+                //             {balance && !sufficientBalance ? t('insufficientBalance') : 'Please, wait...'}
+                //           </GreyCard>
+                //         )}
+                //       </AutoColumn>
+                //     )}
+                //   </ButtonWrap>
+                // }
+              />
+            ))}
+          </NftCardsContainer>
         </AppBody>
       </CardWrapper>
     </ContentHolder>
   )
 }
 
-export default StrategicalPartnershipHome
+export default InvestorsAccount

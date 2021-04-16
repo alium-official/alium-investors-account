@@ -15,10 +15,10 @@
     tiny-warning "^1.0.3"
     toformat "^2.0.0"
 
-"@aliumswap/uikit@0.10.71":
-  version "0.10.71"
-  resolved "https://registry.yarnpkg.com/@aliumswap/uikit/-/uikit-0.10.71.tgz#d955605ee804ce2c9c2ee197ef8037049d4c96bb"
-  integrity sha512-BZKDAp1B3QG9eJDoEyKOgGcLEIZS7J3Am2W/MkrEbhF3Fym7xZvIC3PaWkNFgGeD2opju5FHDZnthVEfNDy0OA==
+"@aliumswap/uikit@0.11.43":
+  version "0.11.43"
+  resolved "https://registry.yarnpkg.com/@aliumswap/uikit/-/uikit-0.11.43.tgz#2f5f9a6e2eace592ae4116f3b704622d484803fa"
+  integrity sha512-fZpN+eUCKJAYnMFV2L5un8Mq2wE5gvgZ4ncxM9Os6lv0qQD43EUh81hNgGw19SUFfYhP+GAFXQbKDZhnPK1fdg==
   dependencies:
     "@types/lodash" "^4.14.162"
     "@types/styled-system" "^5.1.10"
